@@ -6,6 +6,7 @@ vim.opt.number = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 vim.opt.relativenumber = true
+vim.opt.number = true
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -61,6 +62,8 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 vim.opt.swapfile = false
+
+vim.opt.cursorline = true
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
