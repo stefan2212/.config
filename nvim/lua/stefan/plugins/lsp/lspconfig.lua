@@ -3,31 +3,21 @@ return { -- LSP Configuration & Plugins
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for Neovim
     { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
-    'williamboman/mason-lspconfig.nvim',
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-    -- Useful status updates for LSP.
-    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+    { 'williamboman/mason-lspconfig.nvim' },
+    { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
     { 'j-hui/fidget.nvim', opts = {} },
-
-    -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-    -- used for completion, annotations and signatures of Neovim apis
     { 'folke/neodev.nvim', opts = {} },
   },
   config = function()
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
-        -- NOTE: Remember that Lua is a real programming language, and as such it is possible
-        -- to define small helper and utility functions so you don't have to repeat yourself.
-        --
         local map = function(keys, func, desc)
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
         map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
-        -- Find references for the word under your cursor.
         map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
         map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
@@ -44,8 +34,6 @@ return { -- LSP Configuration & Plugins
 
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
-        -- WARN: This is not Goto Definition, this is Goto Declaration.
-        --  For example, in C this would take you to the header.
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -84,7 +72,43 @@ return { -- LSP Configuration & Plugins
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     local servers = {
-      -- clangd = {},
+      dockerls = {},
+      docker_compose_language_service = {},
+      pyright = {},
+      ruff = {},
+      basedpyright = {},
+      tsserver = {},
+      yamlls = {
+        filetypes = { 'yaml' },
+        capabilities = {
+          textDocument = {
+            foldingRange = {
+              dynamicRegistration = true,
+              lineFoldingOnly = true,
+            },
+          },
+        },
+        on_new_config = function(new_config)
+          new_config.settings.yaml.schemas = vim.tbl_deep_extend('force', new_config.settings.yaml.schemas or {}, require('schemastore').yaml.schemas())
+        end,
+        settings = {
+          redhat = { telemetry = { enabled = false } },
+          yaml = {
+            schemas = {
+              ['https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.18.0-standalone-strict/all.json'] = '/*.k8s.yaml',
+            },
+            keyOrdering = false,
+            format = {
+              enable = true,
+            },
+            validate = true,
+            schemaStore = {
+              enable = false,
+              url = '',
+            },
+          },
+        },
+      },
       gopls = {
         cmd = { 'gopls' },
         filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
@@ -125,7 +149,32 @@ return { -- LSP Configuration & Plugins
           },
         },
       },
-
+      typescript = {
+        settings = {
+          javascript = {
+            inlayHints = {
+              includeInlayEnumMemberValueHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all';
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayVariableTypeHints = true,
+            },
+          },
+          typescript = {
+            inlayHints = {
+              includeInlayEnumMemberValueHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all';
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayVariableTypeHints = true,
+            },
+          },
+        },
+      },
       lua_ls = {
         -- cmd = {...},
         -- filetypes = { ...},
@@ -143,12 +192,6 @@ return { -- LSP Configuration & Plugins
     }
 
     require('mason').setup()
-
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      'stylua', -- Used to format Lua code
-    })
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     require('mason-lspconfig').setup {
       handlers = {

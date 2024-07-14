@@ -6,7 +6,8 @@ return {
     'nvim-treesitter/nvim-treesitter',
   },
   config = function()
-    local format_sync_grp = vim.api.nvim_create_augroup('goimports', {})
+    local format_sync_grp = vim.api.nvim_create_augroup('GOFormat', {})
+    local go = require 'go'
     vim.api.nvim_create_autocmd('BufWritePre', {
       pattern = '*.go',
       callback = function()
@@ -14,7 +15,7 @@ return {
       end,
       group = format_sync_grp,
     })
-    require('go').setup()
+    go.setup {}
   end,
   event = { 'CmdlineEnter' },
   ft = { 'go', 'gomod' },

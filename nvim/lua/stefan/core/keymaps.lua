@@ -56,7 +56,6 @@ vim.keymap.set('n', '<leader>tf', '<cmd>tabnew %<CR>', { desc = 'Open current bu
 
 -- Debug Keymaps
 
-vim.keymap.set('n', '<leader>db', '<cmd> DapToggleBreakpoint <CR>', { desc = 'Add breakpoint at line' })
 vim.keymap.set('n', '<leader>dus', function()
   local widgets = require 'dap.ui.widgets'
   local sidebar = widgets.sidebar(widgets.scopes)
