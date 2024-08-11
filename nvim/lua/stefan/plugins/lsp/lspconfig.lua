@@ -94,9 +94,6 @@ return { -- LSP Configuration & Plugins
         settings = {
           redhat = { telemetry = { enabled = false } },
           yaml = {
-            schemas = {
-              ['https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.18.0-standalone-strict/all.json'] = '/*.k8s.yaml',
-            },
             keyOrdering = false,
             format = {
               enable = true,
@@ -104,7 +101,6 @@ return { -- LSP Configuration & Plugins
             validate = true,
             schemaStore = {
               enable = false,
-              url = '',
             },
           },
         },
@@ -174,6 +170,9 @@ return { -- LSP Configuration & Plugins
             },
           },
         },
+      },
+      graphql = {
+        filetypes = { 'graphql', 'gql', 'svelte', 'typescriptreact', 'javascriptreact' },
       },
       lua_ls = {
         -- cmd = {...},

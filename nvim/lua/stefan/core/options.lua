@@ -16,6 +16,7 @@ vim.opt.showmode = false
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
 
+vim.g.lazyvim_prettier_needs_config = false
 -- Enable break indent
 vim.opt.breakindent = true
 

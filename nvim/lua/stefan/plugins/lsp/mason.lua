@@ -24,6 +24,7 @@ return {
 
     require('mason-lspconfig').setup {
       ensure_installed = {
+        'prettier',
         'gopls',
         'pyright',
         'lua_ls',

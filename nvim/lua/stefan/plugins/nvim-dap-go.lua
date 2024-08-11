@@ -2,25 +2,15 @@ return {
   'leoluz/nvim-dap-go',
   ft = 'go',
   dependencies = 'mfussenegger/nvim-dap',
-  keys = {
-    {
-      '<leader>dGs',
-      function()
-        require('dap-go').continue()
-      end,
-      desc = 'Go Debug Mode',
-      ft = 'go',
-    },
-    {
-      '<leader>dGt',
-      function()
-        require('dap-go').debug_test()
-      end,
-      desc = 'Go Debug Test',
-      ft = 'go',
+  opts = {
+    delve = {
+      detached = false,
     },
   },
   config = function(_, opts)
-    require('dap-go').setup(opts)
+    local dapGo = require 'dap-go'
+    vim.keymap.set('n', '<leader>dGt', dapGo.debug_test, { desc = 'Go Debug Test' })
+    require('dap').set_log_level 'TRACE'
+    dapGo.setup(opts)
   end,
 }
