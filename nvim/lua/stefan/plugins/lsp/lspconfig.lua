@@ -172,7 +172,8 @@ return { -- LSP Configuration & Plugins
         },
       },
       graphql = {
-        filetypes = { 'graphql', 'gql', 'svelte', 'typescriptreact', 'javascriptreact' },
+        cmd = { 'graphql-lsp', 'server', '-m', 'stream' },
+        filetypes = { 'graphql', 'typescriptreact', 'javascriptreact' },
       },
       lua_ls = {
         -- cmd = {...},
