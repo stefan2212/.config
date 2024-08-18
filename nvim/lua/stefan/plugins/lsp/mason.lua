@@ -18,10 +18,14 @@ return {
 
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
-      'gopls',
-      'pyright',
-      'lua_ls',
-      'yamlls',
+      'prettier',
+      'stylua',
+      'isort',
+      'black',
+      'pylint',
+      'eslint_d',
+      'markdownlint',
+      'tflint',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -31,6 +35,12 @@ return {
         'pyright',
         'lua_ls',
         'yamlls',
+        'json',
+        'graphql',
+        'typescript',
+        'docker_ls',
+        'ruff',
+        'tssserver',
       },
     }
   end,

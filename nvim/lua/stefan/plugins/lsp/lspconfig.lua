@@ -175,6 +175,16 @@ return { -- LSP Configuration & Plugins
         cmd = { 'graphql-lsp', 'server', '-m', 'stream' },
         filetypes = { 'graphql', 'typescriptreact', 'javascriptreact' },
       },
+      json = {
+        settings = {
+          json = {
+            validate = {
+              schemas = require('schemastore').json.schemas(),
+              enable = true,
+            },
+          },
+        },
+      },
       lua_ls = {
         -- cmd = {...},
         -- filetypes = { ...},
