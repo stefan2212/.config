@@ -4,3 +4,6 @@ jgit/*
 Microsoft*
 nvim2/*
 .git
+qBittorrent/
+helm/
+tmux/plugins/
