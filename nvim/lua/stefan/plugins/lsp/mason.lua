@@ -31,6 +31,8 @@ return {
 
     require('mason-lspconfig').setup {
       ensure_installed = {
+        'goimports',
+        'gofump',
         'gopls',
         'pyright',
         'lua_ls',

@@ -53,17 +53,3 @@ vim.keymap.set('n', '<leader>tx', '<cmd>tabclose<CR>', { desc = 'Close current t
 vim.keymap.set('n', '<leader>tn', '<cmd>tabn<CR>', { desc = 'Go to next tab' }) --  go to next tab
 vim.keymap.set('n', '<leader>tp', '<cmd>tabp<CR>', { desc = 'Go to previous tab' }) --  go to previous tab
 vim.keymap.set('n', '<leader>tf', '<cmd>tabnew %<CR>', { desc = 'Open current buffer in new tab' }) --  move current buffer to new tab
-
--- Debug Keymaps
-
-vim.keymap.set('n', '<leader>dus', function()
-  local widgets = require 'dap.ui.widgets'
-  local sidebar = widgets.sidebar(widgets.scopes)
-  sidebar.oepn()
-end, { desc = 'Open debugging sidebar' })
-vim.keymap.set('n', '<leader>dgt', function()
-  require('dap-go').debug_test()
-end, { desc = 'Debug go test' })
-vim.keymap.set('n', '<leader>dgl', function()
-  require('dap-go').debug_last()
-end, { desc = 'Debug last go test' })
