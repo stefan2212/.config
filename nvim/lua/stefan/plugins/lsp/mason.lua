@@ -32,6 +32,7 @@ return {
     require('mason-lspconfig').setup {
       ensure_installed = {
         'goimports',
+        'omnisharp',
         'gofump',
         'gopls',
         'pyright',

@@ -171,6 +171,7 @@ return { -- LSP Configuration & Plugins
           },
         },
       },
+      omnisharp = {},
       graphql = {
         cmd = { 'graphql-lsp', 'server', '-m', 'stream' },
         filetypes = { 'graphql', 'typescriptreact', 'javascriptreact' },

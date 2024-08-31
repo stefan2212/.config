@@ -17,6 +17,7 @@ return { -- Autocompletion
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
   },
+
   config = function()
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
@@ -73,5 +74,12 @@ return { -- Autocompletion
         },
       },
     }
+
+    cmp.setup.filetype({ 'sql' }, {
+      sources = {
+        { name = 'vim-dadbod-completion' },
+        { name = 'buffer' },
+      },
+    })
   end,
 }

@@ -46,7 +46,6 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.tabstop = 4
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- turn on termguicolors for tokyonight colorscheme to work
 -- (have to use iterm2 or any other true color terminal)
