@@ -75,7 +75,6 @@ return { -- LSP Configuration & Plugins
       dockerls = {},
       docker_compose_language_service = {},
       pyright = {},
-      ruff = {},
       basedpyright = {},
       tsserver = {},
       yamlls = {
@@ -171,6 +170,8 @@ return { -- LSP Configuration & Plugins
           },
         },
       },
+      ruff = {},
+      ruff_lsp = {},
       omnisharp = {},
       graphql = {
         cmd = { 'graphql-lsp', 'server', '-m', 'stream' },

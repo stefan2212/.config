@@ -3,8 +3,11 @@ return { -- Highlight, edit, and navigate code
   build = ':TSUpdate',
   opts = {
     ensure_installed = {
+      'ninja',
+      'rst',
       'bash',
       'comment',
+      'scala',
       'c',
       'diff',
       'html',

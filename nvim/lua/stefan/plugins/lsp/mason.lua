@@ -31,19 +31,15 @@ return {
 
     require('mason-lspconfig').setup {
       ensure_installed = {
-        'goimports',
         'omnisharp',
-        'gofump',
+        'pyright',
         'gopls',
+        'jsonls',
         'pyright',
         'lua_ls',
         'yamlls',
-        'json',
         'graphql',
-        'typescript',
-        'docker_ls',
         'ruff',
-        'tssserver',
       },
     }
   end,
