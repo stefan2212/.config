@@ -1,0 +1,88 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+" options and mappings that are supported by both Vim and IdeaVim
+set nu
+set relativenumber
+
+set hlsearch                      " highlight search occurrences
+set ignorecase                    " ignore case in search patterns
+set smartcase                     " no ignore case when pattern is uppercase
+set incsearch                     " show search results while typing
+set wrapscan                      " searches wrap around the end of the file
+
+set gdefault                      " substitute all occurrences in line per default
+set history=10000                 " keep x lines of command line history
+set scrolloff=5 sidescrolloff=10  " keep some lines before and after the cursor visible
+set clipboard=unnamedplus,unnamed,ideaput " integrate with system clipboard
+set NERDTree
+" https://github.com/JetBrains/ideavim/wiki/%22set%22-commands
+set multiple-cursors
+set commentary
+set surround                      " emulate vim-surround plugin
+set ideajoin
+set ideastatusicon=disabled
+" Leader is <space>
+let mapleader = ' '
+nnoremap <Space> <Nop>
+
+"" Which-key
+set which-key
+set notimeout
+"set timeoutlen=5000
+"let g:WhichKey_ShowVimActions = 'true'
+let g:WhichKey_ShowTypedSequence = 'true'
+" edit ideavim config
+"nnoremap <leader>vv :e ~/.ideavimrc<CR>
+"nnoremap <leader>vr :source ~/.ideavimrc<CR>
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+map \r <Action>(ReformatCode)
+
+map gh <Action>(ShowErrorDescription)
+map K <Action>(ShowHoverInfo)
+
+sethandler <c-h> a:vim
+sethandler <c-l> a:vim
+sethandler <c-j> a:vim
+sethandler <c-k> a:vim
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+
+nmap <leader>n :action GotoNextError<CR>
+map gh <Action>(ShowErrorDescription)
+" NERDTree
+map <leader>ee :NERDTree<CR>
+map <leader>ef :NERDTreeFind<CR>
+
+map <leader>sf <Action>(GotoFile)
+nmap <leader>sg :action FindInPath<CR>
+nmap gr :action ShowUsages<CR>
+nmap gI :action GotoImplementation<CR>
+nmap gs :action GotoSuperMethod<CR>
+
+nmap <leader>ri :action Inline<CR>
+nmap <leader>rr :action RenameElement<CR>
+nmap <leader>rev :action IntroduceVariable<CR>
+vmap <leader>rev :action IntroduceVariable<CR>
+nmap <leader>rem :action ExtractMethod<CR>
+vmap <leader>rem :action ExtractMethod<CR>
+nmap <leader>rm :action Move<CR>
+nmap <leader>ro :action OptimizeImports<CR>
+nmap <leader>rG :action Generate<CR>
+nmap <c-v> :action SplitVertically<cr>
+nmap <leader>f  :action ReformatCode<CR>
+map <leader>b <Action>(ToggleLineBreakpoint)
+
+" Errors
+nmap <leader>x :action GotoNextError<cr>
+nmap <leader>X :action GotoPreviousError<cr>
+
+" Tabs
+nnoremap [b :action PreviousTab<cr>
+nnoremap ]b :action NextTab<cr>
+
